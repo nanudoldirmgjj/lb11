@@ -1,0 +1,140 @@
+#include <iostream>
+#include <ctime>
+#include <string>
+
+using namespace std;
+// для 1 номера
+int max(int a = 4, int b = 7, int c = 2) {
+	int max = a;
+	for (int i = 0; i < 3; i++) {
+		if (max < b) {
+			max = b;
+		}
+		if (max < c) {
+			max = c;
+		}
+	}
+	return max;
+}
+
+//для второго
+int count(int array[5][5], int k);
+
+// для третьего
+int starsValue() {
+	cout << "введите количество звездочек: ";
+	int star;
+	cin >> star;
+	while (cin.fail() || star < 0) {
+		cout << "\nвведено неверное значение!"<< endl;
+		cin.clear();
+		cin.ignore(32767, '\n');
+		cin >> star;
+		cout << endl;
+	}
+	return star;
+}
+string starString(int star = starsValue()) {
+	string stars = "";
+	for (int i = 0; i < star; i++) {
+		stars += "*";
+	}
+	return stars;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int a;
+	cout << "Введите номер задания:" << "\n" << "1. Задание 1" << "\n" << "2. Задание 2" << "\n"
+		<< "3. Задание 3" << "\n" << "4. Задание 4" << "\n5. выход \n";
+	cin >> a;
+	while (cin.fail() || a > 4 || a < 1)
+	{
+		cout << "Ошибка ввода!Повторите!\n";
+		cin.clear();
+		cin.ignore(32767, '\n');
+		cin >> a;
+		cout << endl;
+	}
+	bool k = 0;
+	while (k != 1) {
+
+		switch (a) {
+		case 1:
+		{
+			int a, b, c;
+			cout << "введите 3 числа" << endl;
+			cin >> a >> b >> c;
+			cout << "максимальное число: " << max(a, b, c) << endl;
+			break;
+		}
+		case 2: {
+			srand(time(NULL));
+			int array[5][5];
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 5; j++) {
+					array[i][j] = -5 + rand() % 11;
+					cout << array[i][j] << " ";
+				}
+				cout << endl;
+			}
+
+			int k;
+			cout << "введите k" << endl;
+			cin >> k;
+
+			cout <<  endl << "количество k в массиве: " << count(array, k) << endl;
+			break;
+		}
+		case 3: {
+			string star = starString();
+			cout << endl << "ваша строка: \n" << star << endl;
+
+			break;
+		}
+
+		case 4: {
+			cout << "выход из программы...";
+		default: k = 1;
+
+		}
+
+		}
+		if (k == 1) {
+			break;
+		}
+		else {
+			cout << "Введите номер задания:" << endl;
+			cin >> a;
+			while (cin.fail() || a > 4 || a < 1)
+			{
+				cout << "Ошибка ввода!Повторите!\n";
+				cin.clear();
+				cin.ignore(32767, '\n');
+				cin >> a;
+				cout << endl;
+			}
+		}
+
+	}
+	return 0;
+}
+
+int count(int array[5][5], int k) {
+	int counting = 0;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			if (array[i][j] == k) {
+				counting++;
+			}
+
+
+
+
+		}
+	}
+	return counting;
+
+
+}
